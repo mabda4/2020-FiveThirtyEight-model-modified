@@ -137,13 +137,30 @@ brier_3 <- function(state1 = NULL, state2 = NULL, scenario = NULL)
         print(paste("The probability of Biden winning", state1, "when Biden wins", state2, "is", win_vector_biden[index1]))
         if( real_scores[index1]==1 &&real_scores[index2]==1)
         {
-            brier_score <- ((predictions_vector[index1]*predictions_vector[index2]* win_vector_biden[index1])-1)^2
-            print(paste("The brier score of all these happening is", brier_score))
+            brier_score <- (predictions_vector[index1] - 1)^2
+            brier_score <- brier_score + (predictions_vector[index2] -1)^2
+            brier_score <- brier_score + (win_vector_biden[index1]-1)^2
+           
         }
         else 
         {
-            brier_score <- ((predictions_vector[index1]*predictions_vector[index2]* win_vector_biden[index1])-0)^2
-            print(paste("The brier score of all these happening is", brier_score))
+            if(real_scores[index1]==1)
+            {
+                brier_score <- (predictions_vector[index1] - 1)^2
+            }
+            else
+            {
+                brier_score <- (predictions_vector[index1] - 0)^2
+            }
+            if(real_scores[index2]==1)
+            {
+                brier_score <- brier_score + (predictions_vector[index2] -1)^2
+            }
+            else
+            {
+                brier_score <- brier_score + (predictions_vector[index2] -0)^2
+            }
+            brier_score <- brier_score + (win_vector_biden[index1]-0)^2
         }
     }
 
@@ -152,12 +169,29 @@ brier_3 <- function(state1 = NULL, state2 = NULL, scenario = NULL)
         print(paste("The probability of Trump winning", state1, "when Biden wins", state2, "is", (1-win_vector_biden[index1])))
         if( real_scores[index1]==0 &&real_scores[index2]==1)
         {
-            brier_score <- (((1-predictions_vector[index1])*predictions_vector[index2]* (1-win_vector_biden[index1]))-1)^2
-            print(paste("The brier score of all these happening is", brier_score))
+            brier_score <- ((1-predictions_vector[index1]) - 1)^2
+            brier_score <- brier_score + (predictions_vector[index2] -1)^2
+            brier_score <- brier_score + ((1-win_vector_biden[index1])-1)^2
         }
         else {
-            brier_score <- (((1-predictions_vector[index2])* (1-win_vector_biden[index1]))-0)^2
-            print(paste("The brier score of all these happening is", brier_score))
+
+            if(real_scores[index1]==0)
+            {
+                brier_score <- ((1-predictions_vector[index2]) - 1)^2
+            }
+            else
+            {
+                brier_score <- ((1-predictions_vector[index2]) - 0)^2
+            }
+            if(real_scores[index2]==1)
+            {
+                brier_score <- brier_score + (predictions_vector[index2] -1)^2
+            }
+            else
+            {
+                brier_score <- brier_score + (predictions_vector[index2] -0)^2
+            }
+            brier_score <- brier_score + ((1-win_vector_biden[index1])-0)^2
         }
     }
     if(scenario==3)
@@ -165,12 +199,31 @@ brier_3 <- function(state1 = NULL, state2 = NULL, scenario = NULL)
         print(paste("The probability of Biden winning", state1, "when Trump wins", state2, "is",(1-win_vector_trump[index1])))
         if( real_scores[index1]==1 &&real_scores[index2]==0)
             {
-            brier_score <- ((predictions_vector[index1]*(1-predictions_vector[index2])* (1-win_vector_trump[index1]))-1)^2
-            print(paste("The brier score of all these happening is", brier_score))
+                brier_score <- (predictions_vector[index1] - 1)^2
+                brier_score <- brier_score + ((1-predictions_vector[index2]) -1)^2
+                brier_score <- brier_score + ((1-win_vector_trump[index1])-1)^2
+
         }
         else {
-            brier_score <- ((predictions_vector[index1]*(1-predictions_vector[index2])* (1-win_vector_trump[index1]))-0)^2
-            print(paste("The brier score of all these happening is", brier_score))
+
+            if(real_scores[index1]==1)
+            {
+                brier_score <- (predictions_vector[index1] - 1)^2
+            }
+            else
+            {
+                brier_score <- (predictions_vector[index1] - 0)^2
+            }
+            if(real_scores[index2]==1)
+            {
+                brier_score <- brier_score + ((1-predictions_vector[index2]) -1)^2
+            }
+            else
+            {
+                brier_score <- brier_score + ((1-predictions_vector[index2]) -0)^2
+            }
+            brier_score <- brier_score + ((1-win_vector_trump[index1])-0)^2
+
         }
     }
     if(scenario==4)
@@ -178,14 +231,36 @@ brier_3 <- function(state1 = NULL, state2 = NULL, scenario = NULL)
         print(paste("The probability of Trump winning", state1, "when Trump wins", state2, "is",win_vector_trump[index1]))
         if( real_scores[index1]==0 &&real_scores[index2]==0)
             {
-            brier_score <- ((1-predictions_vector[index1])*(1-predictions_vector[index2])* (win_vector_trump[index1])-1)^2
-            print(paste("The brier score of all these happening is", brier_score))
+            brier_score <- ((1-predictions_vector[index1]) - 1)^2
+            brier_score <- brier_score + ((1-predictions_vector[index2]) -1)^2
+            brier_score <- brier_score + (win_vector_trump[index1]-1)^2
+
         }
         else {
-            brier_score <- (((1-predictions_vector[index1])*(1-predictions_vector[index2])* win_vector_trump[index1])-0)^2
-            print(paste("The brier score of all these happening is", brier_score))
-        } 
+            if(real_scores[index1]==1)
+            {
+                brier_score <- ((1-predictions_vector[index1]) - 1)^2
+            }
+            else
+            {
+                brier_score <- ((1-predictions_vector[index1]) - 0)^2
+            }
+            if(real_scores[index2]==1)
+            {
+                brier_score <- brier_score + ((1-predictions_vector[index2]) -1)^2
+            }
+            else
+            {
+                brier_score <- brier_score + ((1-predictions_vector[index2]) -0)^2
+            }
+            brier_score <- brier_score + (win_vector_trump[index1]-0)^2
+
+        }
+
     }
+        brier_score <- brier_score/3 
+        print(paste("The brier score of all these happening is", brier_score))
+    
 }
 
 brier_2edited <- function(state1 = NULL, state2 = NULL)
@@ -247,11 +322,30 @@ brier_3edited <- function(state1 = NULL, state2 = NULL, scenario = NULL)
     {
         if( real_scores[index1]==1 &&real_scores[index2]==1)
         {
-            brier_score <- brier_score+((predictions_vector[index1]*predictions_vector[index2]* win_vector_biden[index1])-1)^2
+            brier_score <- (predictions_vector[index1] - 1)^2
+            brier_score <- brier_score + (predictions_vector[index2] -1)^2
+            brier_score <- brier_score + (win_vector_biden[index1]-1)^2
+           
         }
         else 
         {
-            brier_score <- brier_score+((predictions_vector[index1]*predictions_vector[index2]* win_vector_biden[index1])-0)^2
+            if(real_scores[index1]==1)
+            {
+                brier_score <- (predictions_vector[index1] - 1)^2
+            }
+            else
+            {
+                brier_score <- (predictions_vector[index1] - 0)^2
+            }
+            if(real_scores[index2]==1)
+            {
+                brier_score <- brier_score + (predictions_vector[index2] -1)^2
+            }
+            else
+            {
+                brier_score <- brier_score + (predictions_vector[index2] -0)^2
+            }
+            brier_score <- brier_score + (win_vector_biden[index1]-0)^2
         }
     }
 
@@ -259,33 +353,94 @@ brier_3edited <- function(state1 = NULL, state2 = NULL, scenario = NULL)
     {
         if( real_scores[index1]==0 &&real_scores[index2]==1)
         {
-            brier_score <- brier_score+(((1-predictions_vector[index1])*predictions_vector[index2]* (1-win_vector_biden[index1]))-1)^2
+            brier_score <- ((1-predictions_vector[index1]) - 1)^2
+            brier_score <- brier_score + (predictions_vector[index2] -1)^2
+            brier_score <- brier_score + ((1-win_vector_biden[index1])-1)^2
         }
         else {
-            brier_score <-brier_score+ (((1-predictions_vector[index2])* (1-win_vector_biden[index1]))-0)^2
+
+            if(real_scores[index1]==0)
+            {
+                brier_score <- ((1-predictions_vector[index2]) - 1)^2
+            }
+            else
+            {
+                brier_score <- ((1-predictions_vector[index2]) - 0)^2
+            }
+            if(real_scores[index2]==1)
+            {
+                brier_score <- brier_score + (predictions_vector[index2] -1)^2
+            }
+            else
+            {
+                brier_score <- brier_score + (predictions_vector[index2] -0)^2
+            }
+            brier_score <- brier_score + ((1-win_vector_biden[index1])-0)^2
         }
     }
     if(scenario==3)
     {
         if( real_scores[index1]==1 &&real_scores[index2]==0)
             {
-            brier_score <- brier_score+((predictions_vector[index1]*(1-predictions_vector[index2])* (1-win_vector_trump[index1]))-1)^2
+                brier_score <- (predictions_vector[index1] - 1)^2
+                brier_score <- brier_score + ((1-predictions_vector[index2]) -1)^2
+                brier_score <- brier_score + ((1-win_vector_trump[index1])-1)^2
+
         }
         else {
-            brier_score <- brier_score+((predictions_vector[index1]*(1-predictions_vector[index2])* (1-win_vector_trump[index1]))-0)^2
+
+            if(real_scores[index1]==1)
+            {
+                brier_score <- (predictions_vector[index1] - 1)^2
+            }
+            else
+            {
+                brier_score <- (predictions_vector[index1] - 0)^2
+            }
+            if(real_scores[index2]==1)
+            {
+                brier_score <- brier_score + ((1-predictions_vector[index2]) -1)^2
+            }
+            else
+            {
+                brier_score <- brier_score + ((1-predictions_vector[index2]) -0)^2
+            }
+            brier_score <- brier_score + ((1-win_vector_trump[index1])-0)^2
+
         }
     }
     if(scenario==4)
     {
         if( real_scores[index1]==0 &&real_scores[index2]==0)
             {
-            brier_score <- brier_score+((1-predictions_vector[index1])*(1-predictions_vector[index2])* (win_vector_trump[index1])-1)^2
+            brier_score <- ((1-predictions_vector[index1]) - 1)^2
+            brier_score <- brier_score + ((1-predictions_vector[index2]) -1)^2
+            brier_score <- brier_score + (win_vector_trump[index1]-1)^2
+
         }
         else {
-            brier_score <- brier_score+(((1-predictions_vector[index1])*(1-predictions_vector[index2])* win_vector_trump[index1])-0)^2
-        } 
-    }
+            if(real_scores[index1]==1)
+            {
+                brier_score <- ((1-predictions_vector[index1]) - 1)^2
+            }
+            else
+            {
+                brier_score <- ((1-predictions_vector[index1]) - 0)^2
+            }
+            if(real_scores[index2]==1)
+            {
+                brier_score <- brier_score + ((1-predictions_vector[index2]) -1)^2
+            }
+            else
+            {
+                brier_score <- brier_score + ((1-predictions_vector[index2]) -0)^2
+            }
+            brier_score <- brier_score + (win_vector_trump[index1]-0)^2
 
+        }
+        
+    }
+    brier_score <- brier_score/3 
     return(brier_score)
 }
 
@@ -323,8 +478,11 @@ average <- function()
     }
     print(paste("The average brier score with the second way of testing it is", (total_2/1680)))
     #runs 420 times, each time making 4 scores
-
+}
+test <-function(){
     total_3 <- 0
+        all_states <-c("AK",  "AL", "AR", "AZ",  "CA", "CO",  "CT", "DC", "DE", "FL", "GA",  "HI", "IA", "ID",  "IL", "IN", "KS", "KY", "LA", "M1", "M2", "MA",  "MD",  "ME", "MI", "MN", "MO", "MS", "MT", "N1", "N2", "N3", "NC", "ND", "NE", "NH",  "NJ", "NM", "NV",  "NY", "OH", "OK", "OR", "PA",  "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VT",  "WA", "WI", "WV", "WY")
+
     for (i in 1:56)
     {
         for (j in 1:56)
@@ -342,7 +500,7 @@ average <- function()
         }
     }     
     
-    print(paste("The average brier score with the third way of testing it is(TT)", (total_3/3136)))
+    print(paste("The average brier score with the third way of testing it is(TT)", (total_3/420)))
     #runs 3136 times
 
 }
