@@ -476,8 +476,8 @@ average <- function()
             }
         }     
     }
-    print(paste("The average brier score with the second way of testing it is", (total_2/1680)))
-    #runs 420 times, each time making 4 scores
+    print(paste("The average brier score with the second way of testing it is", (total_2/1520)))
+    #runs 380 times, each time making 4 scores
 }
 test <-function(){
     total_3 <- 0
@@ -500,8 +500,7 @@ test <-function(){
         }
     }     
     
-    print(paste("The average brier score with the third way of testing it is(TT)", (total_3/420)))
-    #runs 3136 times
+    print(paste("The average brier score with the third way of testing it is(TT)", (total_3/380)))
 
 }
 
