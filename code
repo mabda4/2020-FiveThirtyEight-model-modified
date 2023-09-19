@@ -348,7 +348,7 @@ brier_3edited <- function(state1 = NULL, state2 = NULL, scenario = NULL)
         {
             b1 <- (predictions_vector[index1] - 1)^2
             b2 <-  (predictions_vector[index2] -1)^2
-            b3 <-  (win_vector_biden[index1]-1)^2
+            b3 <-  ((win_vector_biden[index1]*predictions_vector[index2])-1)^2
         }
         else 
         {
@@ -368,7 +368,7 @@ brier_3edited <- function(state1 = NULL, state2 = NULL, scenario = NULL)
             {
                 b2 <-  (predictions_vector[index2] -0)^2
             }
-            b3 <-  (win_vector_biden[index1]-0)^2
+            b3 <-  ((win_vector_biden[index1]*predictions_vector[index2])-0)^2
         }
     }
 
@@ -379,7 +379,7 @@ brier_3edited <- function(state1 = NULL, state2 = NULL, scenario = NULL)
         {
             b1 <- ((1-predictions_vector[index1]) - 1)^2
             b2 <-   (predictions_vector[index2] -1)^2
-            b3 <-  ((1-win_vector_biden[index1])-1)^2
+            b3 <-  (((1-win_vector_biden[index1])*predictions_vector[index2])-1)^2
         }
         else {
 
@@ -399,7 +399,7 @@ brier_3edited <- function(state1 = NULL, state2 = NULL, scenario = NULL)
             {
                 b2 <-  (predictions_vector[index2] -0)^2
             }
-            b3 <-  ((1-win_vector_biden[index1])-0)^2
+            b3 <-  (((1-win_vector_biden[index1])*predictions_vector[index2])-0)^2
         }
     }
     if(scenario==3)
@@ -409,7 +409,7 @@ brier_3edited <- function(state1 = NULL, state2 = NULL, scenario = NULL)
             {
                 b1 <- (predictions_vector[index1] - 1)^2
                 b2 <-   ((1-predictions_vector[index2]) -1)^2
-                b3 <-  ((1-win_vector_trump[index1])-1)^2
+                b3 <-  (((1-win_vector_trump[index1])*(1-predictions_vector[index2]))-1)^2
 
         }
         else {
@@ -430,7 +430,7 @@ brier_3edited <- function(state1 = NULL, state2 = NULL, scenario = NULL)
             {
                 b2 <- ((1-predictions_vector[index2]) -0)^2
             }
-            b3 <-   ((1-win_vector_trump[index1])-0)^2
+            b3 <-   (((1-win_vector_trump[index1])*(1-predictions_vector[index2]))-0)^2
 
         }
     }
@@ -441,7 +441,7 @@ brier_3edited <- function(state1 = NULL, state2 = NULL, scenario = NULL)
             {
             b1 <- ((1-predictions_vector[index1]) - 1)^2
             b2 <- ((1-predictions_vector[index2]) -1)^2
-            b3 <- (win_vector_trump[index1]-1)^2
+            b3 <- (win_vector_trump[index1]*(1-predictions_vector[index2])-1)^2
 
         }
         else {
@@ -461,7 +461,7 @@ brier_3edited <- function(state1 = NULL, state2 = NULL, scenario = NULL)
             {
                 b2 <-   ((1-predictions_vector[index2]) -0)^2
             }
-            b3 <-   (win_vector_trump[index1]-0)^2
+            b3 <-   (win_vector_trump[index1]*(1-predictions_vector[index2])-0)^2
 
         }
         
