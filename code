@@ -278,35 +278,52 @@ brier_2edited <- function(state1 = NULL, state2 = NULL)
      {
         b <-((predictions_vector[index2]* win_vector_biden[index1])-1)^2
         brier_score <- b
-        cat(state1, state2, "BB", predict_vector[i], conditonal, real_scores[index1], real_scores[index2], b, "\n")
+        cat(state1, state2, "BB", win_vector_biden[index1], predictions_vector[index2], real_scores[index1], real_scores[index2], b, "\n")
     }
     else 
     {
-        brier_score <- ((predictions_vector[index2]* win_vector_biden[index1])-0)^2
+        b <-((predictions_vector[index2]* win_vector_biden[index1])-0)^2
+        brier_score <- b
+        cat(state1, state2, "BB", win_vector_biden[index1], predictions_vector[index2], real_scores[index1], real_scores[index2], b, "\n")
     }
 
     if( real_scores[index1]==0 &&real_scores[index2]==1)
      {
-        brier_score <- brier_score + ((predictions_vector[index2]* (1-win_vector_biden[index1]))-1)^2
+        b<- ((predictions_vector[index2]* (1-win_vector_biden[index1]))-1)^2
+        brier_score <- brier_score + b
+        cat(state1, state2, "TB", (1-win_vector_biden[index1]), predictions_vector[index2], real_scores[index1], real_scores[index2], b, "\n")
     }
     else {
-        brier_score <- brier_score + ((predictions_vector[index2]* (1-win_vector_biden[index1]))-0)^2
+        b<-((predictions_vector[index2]* (1-win_vector_biden[index1]))-0)^2
+        brier_score <- brier_score + b
+        cat(state1, state2, "TB", (1-win_vector_biden[index1]), predictions_vector[index2], real_scores[index1], real_scores[index2], b, "\n")
     }
 
     if( real_scores[index1]==1 &&real_scores[index2]==0)
         {
-        brier_score <- brier_score + (((1-predictions_vector[index2])* (1-win_vector_trump[index1]))-1)^2
+            b<-(((1-predictions_vector[index2])* (1-win_vector_trump[index1]))-1)^2
+        brier_score <- brier_score + b
+        cat(state1, state2, "BT", (1-win_vector_trump[index1]), (1-predictions_vector[index2]), real_scores[index1], real_scores[index2], b, "\n")
     }
     else {
-        brier_score <- brier_score + (((1-predictions_vector[index2])* (1-win_vector_trump[index1]))-0)^2
+        b<-(((1-predictions_vector[index2])* (1-win_vector_trump[index1]))-0)^2
+        brier_score <- brier_score + b
+        cat(state1, state2, "BT", (1-win_vector_trump[index1]), (1-predictions_vector[index2]), real_scores[index1], real_scores[index2], b, "\n")
+
     }
 
     if( real_scores[index1]==0 &&real_scores[index2]==0)
         {
-        brier_score <- brier_score + ((1-predictions_vector[index2])* (win_vector_trump[index1])-1)^2
+            b<- ((1-predictions_vector[index2])* (win_vector_trump[index1])-1)^2
+        brier_score <- brier_score + b
+        cat(state1, state2, "TT", win_vector_trump[index1], (1-predictions_vector[index2]), real_scores[index1], real_scores[index2], b, "\n")
+
     }
     else {
-        brier_score <- brier_score + (((1-predictions_vector[index2])* win_vector_trump[index1])-0)^2
+        b<-(((1-predictions_vector[index2])* win_vector_trump[index1])-0)^2
+        brier_score <- brier_score + b
+        cat(state1, state2, "TT", win_vector_trump[index1], (1-predictions_vector[index2]), real_scores[index1], real_scores[index2], b, "\n")
+
     } 
     return (brier_score)
 }
@@ -525,7 +542,7 @@ a <-function()
     brier_vector <- (predict_vector-real_scores)^2
 
     total <- 0
-    cat("State1: State2: Scenario: Win Prob1: Conditional Prob2: Outcome1: Outcome2: Brier Score: \n")
+    cat("State1: State2: Scenario: Conditional Prob(State1): Win Prob(State2): Outcome1: Outcome2: Brier Score: \n")
     for (i in 1:56) 
     {
         for(j in 1:56)
