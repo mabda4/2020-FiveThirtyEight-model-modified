@@ -330,7 +330,7 @@ brier_2edited <- function(state1 = NULL, state2 = NULL)
 brier_3edited <- function(state1 = NULL, state2 = NULL, scenario = NULL)
 {
 
-    cat(state1, state2, " ")
+    cat(state1, state2, "")
 
   condition_biden <- biden_wins[,state2]
   condition_trump <- trump_wins[,state2]
@@ -343,7 +343,7 @@ brier_3edited <- function(state1 = NULL, state2 = NULL, scenario = NULL)
     
     if(scenario==1)
     {
-        cat(predictions_vector[index1], win_vector_biden[index1], predictions_vector[index2], real_scores[index1], real_scores[index2])
+        cat(predictions_vector[index1], win_vector_biden[index1], predictions_vector[index2], real_scores[index1], real_scores[index2],"")
         if( real_scores[index1]==1 &&real_scores[index2]==1)
         {
             b1 <- (predictions_vector[index1] - 1)^2
@@ -374,7 +374,7 @@ brier_3edited <- function(state1 = NULL, state2 = NULL, scenario = NULL)
 
     if(scenario==2)
     {
-        cat((1-predictions_vector[index1]), (1-win_vector_biden[index1]), predictions_vector[index2], real_scores[index1], real_scores[index2])
+        cat((1-predictions_vector[index1]), (1-win_vector_biden[index1]), predictions_vector[index2], real_scores[index1], real_scores[index2],"")
         if( real_scores[index1]==0 &&real_scores[index2]==1)
         {
             b1 <- ((1-predictions_vector[index1]) - 1)^2
@@ -404,7 +404,7 @@ brier_3edited <- function(state1 = NULL, state2 = NULL, scenario = NULL)
     }
     if(scenario==3)
     {
-        cat(predictions_vector[index1], (1-win_vector_trump[index1]), (1-predictions_vector[index2]), real_scores[index1], real_scores[index2])
+        cat(predictions_vector[index1], (1-win_vector_trump[index1]), (1-predictions_vector[index2]), real_scores[index1], real_scores[index2],"")
         if( real_scores[index1]==1 &&real_scores[index2]==0)
             {
                 b1 <- (predictions_vector[index1] - 1)^2
@@ -436,7 +436,7 @@ brier_3edited <- function(state1 = NULL, state2 = NULL, scenario = NULL)
     }
     if(scenario==4)
     {
-        cat((1-predictions_vector[index1]), (win_vector_trump[index1]), (1-predictions_vector[index2]), real_scores[index1], real_scores[index2])
+        cat((1-predictions_vector[index1]), (win_vector_trump[index1]), (1-predictions_vector[index2]), real_scores[index1], real_scores[index2], "")
         if( real_scores[index1]==0 &&real_scores[index2]==0)
             {
             b1 <- ((1-predictions_vector[index1]) - 1)^2
