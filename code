@@ -608,3 +608,8 @@ b <-function()
     cat("The average brier score with the third way of testing it is(TT)", (total/462))
     sink()
 }
+
+shares <-function(){
+    shares_vector =round(apply(state_sims, 2, mean), 2)
+    
+}
