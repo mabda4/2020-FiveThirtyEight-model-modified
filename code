@@ -620,7 +620,6 @@ shares <-function(){
         if(real_scores[i]!=0)
         {
             total <- total + ((shares_vector[i]-real_shares[i])^2)
-            print(total)
         }
     }
     print(paste("The vote share brier score is ", total/51))
