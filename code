@@ -617,10 +617,46 @@ shares <-function(){
     total <- 0
     for(i in 1:56)
     {
-        if(real_scores[i]!=0)
+        if(real_shares[i]!=0)
         {
-            total <- total + ((shares_vector[i]-real_shares[i])^2)
+            if(i!=1 && i!=2 && i!= 3 && i!= 5 && i!= 7 && i!= 8 && i!= 9 && i!= 12 && i!= 14 && i!= 15 && i!= 16 && i!= 17 && i!= 18 && i!= 19 && i!= 20 && i!= 22 && i!= 23 && i!= 29 && i!= 30 && i!= 32 && i!= 34 && i!= 35 && i!= 37 && i!= 40 && i!= 42 && i!= 43 && i!= 45 && i!= 47 && i!= 48 && i!= 50 && i!= 52 && i!= 53 && i!= 55 && i!= 56)
+            {
+                total <- total + ((shares_vector[i]-real_shares[i])^2)
+            }
         }
     }
-    print(paste("The vote share brier score is ", total/51))
+    print(paste("The vote share brier score is ", total/20))
+}
+
+shares_3 <- function()
+{
+    shares_vector <- round(apply(state_sims, 2, mean), 2)
+    real_shares <-c("AK"=42.8,  "AL"=36.6, "AR"=34.8, "AZ"=49.4,  "CA"=63.5, "CO"=55.4,  "CT"=58.3, "DC"=92.1, "DE"=58.7, "FL"=47.9, "GA"=49.5,  "HI"=63.7, "IA"=44.9, "ID"=33.1,  "IL"=57.5, "IN"=41, "KS"=41.5, "KY"=36.1, "LA"=39.9, "M1"=0, "M2"=0, "MA"=65.6,  "MD"=65.4,  "ME"=53.1, "MI"=50.6, "MN"=52.4, "MO"=41.4, "MS"=41, "MT"=40.5, "N1"=0, "N2"=0, "N3"=0, "NC"=48.6, "ND"=31.8, "NE"=39.2, "NH"=52.7,  "NJ"=57.1, "NM"=54.3, "NV"=50.1,  "NY"=60.9, "OH"=45.2, "OK"=32.3, "OR"=56.5, "PA"=50,  "RI"=59.4, "SC"=43.4, "SD"=35.6, "TN"=37.4, "TX"=46.5, "UT"=37.6, "VA"=54.1, "VT"=66.1,  "WA"=58, "WI"=49.4, "WV"=29.7, "WY"=26.6)
+    shares_vector= abs(shares_vector/2-.50)
+    real_shares = real_shares *.01
+    total <- 0
+
+    for(i in 1:56)
+    {
+        for(j in 1:56)
+        {
+            if(real_shares[i]!=0)
+            {
+                if(real_shares[j]!=0)
+                {
+                    if(i!=j)
+                    {
+                        brier <- ((shares_vector[i]-real_shares[i])^2)
+                        brier <- brier + ((shares_vector[j]-real_shares[j])^2)
+                        brier <- brier + ((shares_vector[i]^2-real_shares[i]^2)^2)
+                        brier <- brier + ((shares_vector[j]^2-real_shares[j]^2)^2)
+                        brier <- brier + (((shares_vector[i]*shares_vector[j])-(real_shares[i]*real_shares[j]))^2)
+                        brier <- brier/5
+                        total <- total + brier
+                    }
+                }
+            }
+        }
+    }
+    print(paste("The vote share brier score third method is ",total/2550))   
 }
