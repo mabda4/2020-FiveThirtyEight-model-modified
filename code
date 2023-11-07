@@ -636,6 +636,7 @@ shares_3 <- function()
     real_shares = real_shares *.01
     total <- 0
 
+    #  /2-.50 then * or ^2 then mean
     for(i in 1:56)
     {
         for(j in 1:56)
@@ -648,8 +649,8 @@ shares_3 <- function()
                     {
                         brier <- ((shares_vector[i]-real_shares[i])^2)
                         brier <- brier + ((shares_vector[j]-real_shares[j])^2)
-                        brier <- brier + ((shares_vector[i]^2-real_shares[i]^2)^2)
-                        brier <- brier + ((shares_vector[j]^2-real_shares[j]^2)^2)
+                        # brier <- brier + ((shares_vector[i]^2-real_shares[i]^2)^2)
+                        # brier <- brier + ((shares_vector[j]^2-real_shares[j]^2)^2)
                         brier <- brier + (((shares_vector[i]*shares_vector[j])-(real_shares[i]*real_shares[j]))^2)
                         brier <- brier/5
                         total <- total + brier
