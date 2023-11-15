@@ -651,16 +651,15 @@ shares_3 <- function()
                 if(real_shares[j]!=0)
                 {
                     if(i!=j)
-                    {
+                    {   
+                        shares_vector3 <-0
 
-                        values_i <- state_sims[[i]]
-                        values_j <- state_sims[[j]]
+                        values_i <- state_sims[i, ]
+                        values_j <- state_sims[j, ]
                         abs1 <- abs(values_i/2 - 0.50)
                         abs2 <- abs(values_j/2 - 0.50)
-                        shares_vector3 <- abs1* abs2
-                        #shares_vector3 <- round(apply(shares_vector3, 2, mean), 2) #gives me an error
-                        print(shares_vector3)
-
+                        shares_vector3 <- abs1 * abs2
+                        shares_vector3 <- round(mean(abs1 * abs2), 2)
                         brier <- ((shares_vector[i]-real_shares[i])^2)
                         brier <- brier + ((shares_vector[j]-real_shares[j])^2)
                         brier <- brier + ((shares_vector2[i]-(real_shares[i]^2))^2)
